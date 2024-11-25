@@ -27,12 +27,10 @@ public class Lottery {
             return null;
         }
 
-        // Generate a random number between 1 and totalTickets
         int winningTicket = rand.nextInt(totalTickets) + 1;
 
         int ticketSum = 0;
-
-        // random number --> ticket
+        
         for (Process p : processes) {
             if (!p.isFinished()) {
                 ticketSum += p.getTickets();
