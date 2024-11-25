@@ -8,6 +8,7 @@ public class Process {
     private int tickets;
     private int allotmentCount = 0;
     private int arrivalTime;
+    private boolean isFinished = false;
 
     public Process() {
         jobID = ID++;
@@ -23,7 +24,6 @@ public class Process {
         jobLength = 10*((int)(Math.random()*((maxLength/10)-(minLength/10)))+(minLength/10));
         arrivalTime = 10*(int)(Math.random()*((latestArrival/10)-(earliestArrival/10))+(earliestArrival/10));
         tickets = (int)(Math.random()*(maxTickets-minTickets))+minTickets;
-
     }
 
     public int getJobLength() {
@@ -60,6 +60,21 @@ public class Process {
 
     public void setArrivalTime(int start) {
         arrivalTime = start;
+    }
+
+    public boolean isFinished() {
+        return isFinished;
+    }
+
+    public void runProcess() {
+        if (jobLength > 0) {
+            jobLength--; //assuming time slice is 1
+            System.out.println("Running process " + jobID + " with " + jobLength + "ms left.");
+        }
+        if (jobLength <= 0) {
+            isFinished = true;
+            System.out.println("Process " + jobID + " has finished.");
+        }
     }
 
     public void printProcess() {
